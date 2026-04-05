@@ -1,7 +1,7 @@
 -- create_table_item_menu
 
 CREATE TABLE IF NOT EXISTS item_menu (
-    id INT8 PRIMARY KEY NOT NULL,
+    id BIGSERIAL PRIMARY KEY NOT NULL,
     uuid UUID NOT NULL,
     base_64_img TEXT NOT NULL,
     alt_description VARCHAR(255) NOT NULL,

@@ -2,6 +2,7 @@ package br.com.barbaridadesp.barbaridade_api.domain.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Data
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @MappedSuperclass
