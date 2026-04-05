@@ -2,20 +2,24 @@ package br.com.barbaridadesp.barbaridade_api.domain.entity;
 
 import br.com.barbaridadesp.barbaridade_api.domain.enums.CategoriaItemMenu;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity()
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "item_menu")
 public class ItemMenu extends GenericModel {
 
-    @Column(name = "base_64_img", nullable = false)
-    private String base64Img;
+    @Column(name = "base_64_image", nullable = false)
+    private String base64Image;
 
-    @Column(name = "alt_description", nullable = false)
-    private String altDescription;
+    @Column(name = "descricao_alt_image", nullable = false)
+    private String descricaoAltImage;
 
     @Column(name = "nome", nullable = false)
     private String nome;
