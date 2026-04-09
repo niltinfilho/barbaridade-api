@@ -1,6 +1,7 @@
 package br.com.barbaridadesp.barbaridade_api.controller;
 
 import br.com.barbaridadesp.barbaridade_api.domain.dto.ItemMenuDTO;
+import br.com.barbaridadesp.barbaridade_api.domain.dto.ItemMenuDetalhesDTO;
 import br.com.barbaridadesp.barbaridade_api.domain.dto.ResponseDTO;
 import br.com.barbaridadesp.barbaridade_api.domain.entity.ItemMenu;
 import br.com.barbaridadesp.barbaridade_api.domain.form.ItemMenuForm;
@@ -35,18 +36,14 @@ public class ItemMenuController {
         return ResponseEntity.ok(service.excluir(uuidItemMenu));
     }
 
-    @GetMapping(value = "/menu-itens", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ItemMenuDTO>> buscarTodosItens() {
-        return ResponseEntity.ok(service.buscarTodos().stream().map(ItemMenuDTO::new).toList());
+    @GetMapping(value = "/menu-item/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ItemMenuDTO> buscarItemMenu(@PathVariable UUID uuidItemMenu) {
+        return ResponseEntity.ok(new ItemMenuDTO(service.buscarPorUuid(uuidItemMenu)));
     }
 
-    @GetMapping(value = "/painel/menu-itens", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ItemMenu>> painelBuscarTodosItens() {
+    @GetMapping(value = "/menu-itens", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<ItemMenuDetalhesDTO>> buscarTodosItens() {
         return ResponseEntity.ok(service.buscarTodos());
     }
 
-    @GetMapping(value = "/painel/menu-item/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ItemMenu> painelBuscarItemMenu(@PathVariable UUID uuidItemMenu) {
-        return ResponseEntity.ok(service.buscarPorUuid(uuidItemMenu));
-    }
 }
