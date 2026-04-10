@@ -26,9 +26,9 @@ public class ItemMenuController {
         return ResponseEntity.ok(service.cadastrar(form));
     }
 
-    @PutMapping(value = "/menu-item/alterar/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ResponseDTO> alterarItemMenu(@PathVariable UUID uuidItemMenu, @RequestBody ItemMenuForm form) {
-        return ResponseEntity.ok(service.alterar(uuidItemMenu, form));
+    @PutMapping(value = "/menu-item/editar/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ResponseDTO> editarItemMenu(@PathVariable UUID uuidItemMenu, @RequestBody ItemMenuForm form) {
+        return ResponseEntity.ok(service.editar(uuidItemMenu, form));
     }
 
     @DeleteMapping(value = "/menu-item/deletar/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})

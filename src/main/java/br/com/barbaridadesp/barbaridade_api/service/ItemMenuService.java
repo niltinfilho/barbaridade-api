@@ -37,14 +37,15 @@ public class ItemMenuService {
         return new ResponseDTO("Item do menu cadastrado com sucesso!");
     }
 
-    public ResponseDTO alterar(UUID uuidItemMenu, ItemMenuForm form) {
+    public ResponseDTO editar(UUID uuidItemMenu, ItemMenuForm form) {
         validarItemMenu(uuidItemMenu, form);
         ItemMenu itemMenu = buscarPorUuid(uuidItemMenu);
         itemMenu.setNome(form.nome());
         itemMenu.setDescricao(form.descricao());
-        itemMenu.setBase64Image(form.base64Image());
         itemMenu.setDescricaoAltImage(form.descricaoAltImage());
         itemMenu.setCategoria(form.categoria());
+        if (nonNull(form.base64Image()))
+            itemMenu.setBase64Image( form.base64Image());
         repository.save(itemMenu);
         return new ResponseDTO("Item do menu alterado com sucesso!");
     }
@@ -82,8 +83,6 @@ public class ItemMenuService {
             throw new ApiResponseException(HttpStatus.BAD_REQUEST, "A descrição não pode estar vazia!");
         if (isNull(form.categoria()))
             throw new ApiResponseException(HttpStatus.BAD_REQUEST, "A categoria não pode estar vazia!");
-        if (isNull(form.base64Image()) || form.base64Image().isBlank())
-            throw new ApiResponseException(HttpStatus.BAD_REQUEST, "A imagem não pode estar vazia!");
         if (isNull(form.descricaoAltImage()) || form.descricaoAltImage().isBlank())
             throw new ApiResponseException(HttpStatus.BAD_REQUEST, "A descrição alt da imagem não pode estar vazia!");
 
@@ -92,6 +91,8 @@ public class ItemMenuService {
             if (!form.nome().equals(itemMenu.getNome()) && nonNull(repository.findByNomeItemMenu(form.nome())))
                 throw new ApiResponseException(HttpStatus.BAD_REQUEST, "Já existe um item cadastrado com esse nome!");
         } else {
+            if (isNull(form.base64Image()) || form.base64Image().isBlank())
+                throw new ApiResponseException(HttpStatus.BAD_REQUEST, "A imagem não pode estar vazia!");
             if (nonNull(repository.findByNomeItemMenu(form.nome())))
                 throw new ApiResponseException(HttpStatus.BAD_REQUEST, "Já existe um item cadastrado com esse nome!");
         }
