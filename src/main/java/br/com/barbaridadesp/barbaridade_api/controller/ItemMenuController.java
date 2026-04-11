@@ -4,6 +4,7 @@ import br.com.barbaridadesp.barbaridade_api.domain.dto.ItemMenuDTO;
 import br.com.barbaridadesp.barbaridade_api.domain.dto.ItemMenuDetalhesDTO;
 import br.com.barbaridadesp.barbaridade_api.domain.dto.ResponseDTO;
 import br.com.barbaridadesp.barbaridade_api.domain.entity.ItemMenu;
+import br.com.barbaridadesp.barbaridade_api.domain.enums.CategoriaItemMenu;
 import br.com.barbaridadesp.barbaridade_api.domain.form.ItemMenuForm;
 import br.com.barbaridadesp.barbaridade_api.service.ItemMenuService;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,11 @@ public class ItemMenuController {
     @GetMapping(value = "/menu-item/{uuidItemMenu}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ItemMenuDTO> buscarItemMenu(@PathVariable UUID uuidItemMenu) {
         return ResponseEntity.ok(new ItemMenuDTO(service.buscarPorUuid(uuidItemMenu)));
+    }
+
+    @GetMapping(value = "/menu-item/{categoria}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ItemMenuDetalhesDTO> buscarItensPorCategoria(@PathVariable CategoriaItemMenu categoria) {
+        return ResponseEntity.ok(service.buscarPorCategoria(categoria));
     }
 
     @GetMapping(value = "/menu-itens", produces = {MediaType.APPLICATION_JSON_VALUE})

@@ -72,6 +72,18 @@ public class ItemMenuService {
         return resultados;
     }
 
+    public ItemMenuDetalhesDTO buscarPorCategoria(CategoriaItemMenu categoria) {
+        ItemMenuDetalhesDTO itemMenuDetalhes = new ItemMenuDetalhesDTO();
+        List<ItemMenuDetalhesDTO.Item> itens = new ArrayList<>();
+        itemMenuDetalhes.setCategoria(categoria);
+        itemMenuDetalhes.setDescricaoCategoria(categoria.getDescricao());
+        repository.findAllByCategoria(categoria).forEach(itemMenu -> {
+            itens.add(new ItemMenuDetalhesDTO.Item(itemMenu));
+        });
+        itemMenuDetalhes.setItens(itens);
+        return itemMenuDetalhes;
+    }
+
     public ItemMenu buscarPorUuid(UUID uuidItemMenu) {
         return repository.findByUuidItemMenu(uuidItemMenu);
     }
