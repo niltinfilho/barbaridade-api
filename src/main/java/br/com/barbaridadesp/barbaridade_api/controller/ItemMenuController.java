@@ -42,7 +42,7 @@ public class ItemMenuController {
         return ResponseEntity.ok(new ItemMenuDTO(service.buscarPorUuid(uuidItemMenu)));
     }
 
-    @GetMapping(value = "/menu-item/{categoria}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/menu-item/categoria/{categoria}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ItemMenuDetalhesDTO> buscarItensPorCategoria(@PathVariable CategoriaItemMenu categoria) {
         return ResponseEntity.ok(service.buscarPorCategoria(categoria));
     }
